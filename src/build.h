@@ -1,0 +1,5 @@
+#define VERSION "3.0.0"
+#define COMPILER "unknown"  
+#define ID "unknown"
+#define BUILD "unknown"
+#define DIR "unknown"

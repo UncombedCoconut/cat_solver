@@ -1,32 +1,26 @@
-CaDiCaL SAT solver
+Kissat SAT solver
 ==================
-[![Build Status](https://travis-ci.com/mmaroti/cadical-rs.svg?branch=master)](https://travis-ci.com/mmaroti/cadical-rs)
-[![Crate](https://img.shields.io/crates/v/cadical)](https://crates.io/crates/cadical)
-[![Documentation](https://docs.rs/cadical/badge.svg)](https://docs.rs/cadical)
-[![GitHub](https://img.shields.io/github/license/mmaroti/cadical-rs)](LICENSE)
+[![GitHub](https://img.shields.io/github/license/UncombedCoconut/kissat-rs)](LICENSE)
 
-This is a stand alone crate that contains both the C++ source code of the
-CaDiCaL incremental SAT solver together with its Rust binding. The C++
-files are compiled and statically linked during the build process. This
-crate works on Linux, Apple OSX, Windows, Android, iOS, Raspberry Pi,
-NetBSD and FreeBSD.
+This is a stand alone crate that contains both the C source code of the
+Kissat SAT solver together with its Rust binding. The C files are compiled
+and statically linked during the build process.
 
-CaDiCaL won first place in the SAT track of the SAT Race 2019 and second
-overall place. It was written by Armin Biere, and it is available under the
-MIT license.
+Kissat dominated the main track of the Sat Competition 2022.
+It was written by Armin Biere, and it is available under the MIT license.
+This crate is based on the "cadical" crate. (Kissat is the CaDiCaL author's
+port "back to C with improved data structures, better scheduling of
+inprocessing and optimized algorithms and implementation." Unlike its
+predecessor, it does not yet support incremental solving, yet.)
 
 The literals are unwrapped positive and negative integers, exactly as in the
 DIMACS format. The common IPASIR operations are presented in a safe Rust
 interface.
 
 ```
-let mut sat: cadical::Solver = Default::default();
-sat.add_clause([1, 2].iter().copied());
-sat.add_clause([-1, 2].iter().copied());
+let mut sat: kissat::Solver = Default::default();
+sat.add_clause([1, 2]);
+sat.add_clause([-1, 2]);
 assert_eq!(sat.solve(), Some(true));
 assert_eq!(sat.value(2), Some(true));
 ```
-
-The C++ library is build with assertions disabled and with optimization level
-3 by default. C++ assertions are enabled only when cargo is building a debug 
-version and the `cpp-debug` feature of the library is enabled.

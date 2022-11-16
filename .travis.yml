@@ -3,7 +3,7 @@ language: rust
 
 env:
   global:
-    - CRATE_NAME=cadical
+    - CRATE_NAME=kissat-rs
 
 matrix:
   include:
