@@ -3,7 +3,7 @@ language: rust
 
 env:
   global:
-    - CRATE_NAME=kissat-rs
+    - CRATE_NAME=cat_solver
 
 matrix:
   include:

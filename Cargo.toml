@@ -1,12 +1,12 @@
 [package]
-name = "kissat-rs"
+name = "cat_solver"
 description = "Rust bindings for the Kissat SAT solver"
 version = "0.1.0"
 license = "MIT"
 authors = ["Justin Blanchard <UncombedCoconut@gmail.com>"]
 edition = "2021"
-repository = "https://github.com/UncombedCoconut/kissat-rs/"
-keywords = ["SAT", "solver", "logic", "satisfiability", "minisat"]
+repository = "https://github.com/UncombedCoconut/cat_solver/"
+keywords = ["SAT", "solver", "logic", "satisfiability", "cadical", "kissat"]
 categories = ["mathematics", "science"]
 readme = "README.md"
 links = "kissat"

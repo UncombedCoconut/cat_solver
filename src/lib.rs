@@ -1,8 +1,14 @@
 //! This is a stand alone crate that contains both the C source code of the
 //! Kissat SAT solver together with its Rust binding. The C files are compiled
 //! and statically linked during the build process.
-//! Kissat dominated the main track of the Sat Competition 2022.
-//! It was written by Armin Biere, and it is available under the MIT license.
+//!
+//! Kissat variants dominated the main track of the Sat Competition 2022.
+//! Author Armin Biere describes Kissat as follows:
+//!
+//! Kissat is a "keep it simple and clean bare metal SAT solver" written in C.
+//! It is a port of CaDiCaL back to C with improved data structures,
+//! better scheduling of inprocessing and optimized algorithms and implementation.
+//! Coincidentally "kissat" also means "cats" in Finnish.
 
 use std::ffi::CStr;
 use std::os::raw::{c_char, c_int, c_uint, c_void};
@@ -23,7 +29,7 @@ extern "C" {
 /// as in the DIMACS format. The common IPASIR operations are presented in a safe Rust interface.
 /// # Examples
 /// ```
-/// let mut sat: kissat_rs::Solver = Default::default();
+/// let mut sat: cat_solver::Solver = Default::default();
 /// sat.add_clause([1, 2]);
 /// sat.add_clause([-1, 2]);
 /// assert_eq!(sat.solve(), Some(true));
@@ -50,7 +56,8 @@ impl Solver {
     /// Adds the given clause to the solver. Negated literals are negative
     /// integers, positive literals are positive ones. All literals must be
     /// non-zero and different from `i32::MIN`.
-    /// Crashes your program if attempted after a solve(). Sorry.
+    /// Beware: Kissat will abort if you try this after solve(),
+    /// as incremental solving is not yet implemented.
     #[inline]
     pub fn add_clause<I>(&mut self, clause: I)
     where
@@ -67,7 +74,8 @@ impl Solver {
     /// satisfiable, then `Some(true)` is returned. If the formula is
     /// unsatisfiable, then `Some(false)` is returned. If the solver runs out
     /// of resources or was terminated, then `None` is returned.
-    /// Crashes your program if attempted after a solve(). Sorry.
+    /// Beware: Kissat will abort if you try this after solve(),
+    /// as incremental solving is not yet implemented.
     pub fn solve(&mut self) -> Option<bool> {
         let r = unsafe { kissat_solve(self.ptr) };
         if r == 10 {
