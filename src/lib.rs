@@ -6,8 +6,6 @@
 
 use std::ffi::CStr;
 use std::os::raw::{c_char, c_int, c_uint, c_void};
-use std::ptr::null_mut;
-use std::time::Instant;
 use std::fmt;
 
 extern "C" {
