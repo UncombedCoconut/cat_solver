@@ -21,6 +21,7 @@ extern "C" {
     fn kissat_add(ptr: *mut c_void, lit: c_int);
     fn kissat_solve(ptr: *mut c_void) -> c_int;
     fn kissat_value(ptr: *mut c_void, lit: c_int) -> c_int;
+    fn kissat_reserve(ptr: *mut c_void, max_var: c_int);
     fn kissat_set_conflict_limit(ptr: *mut c_void, limit: c_uint);
     fn kissat_set_decision_limit(ptr: *mut c_void, limit: c_uint);
 }
@@ -45,6 +46,14 @@ impl Solver {
     pub fn new() -> Self {
         let ptr = unsafe { kissat_init() };
         Self { ptr }
+    }
+
+    /// Increases the maximum variable index explicitly.
+    #[inline]
+    pub fn reserve(&mut self, max_var: i32)
+    {
+        debug_assert!(max_var > 0);
+        unsafe { kissat_reserve(self.ptr, max_var) };
     }
 
     /// Returns the name and version of the Kissat library.

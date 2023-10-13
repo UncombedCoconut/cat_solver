@@ -27,7 +27,7 @@ DIMACS format. The common IPASIR operations are presented in a safe Rust
 interface.
 
 ```
-let mut sat: kissat::Solver::new();
+let mut sat: cat_solver::Solver::new();
 sat.add_clause([1, 2]);
 sat.add_clause([-1, 2]);
 assert_eq!(sat.solve(), Some(true));

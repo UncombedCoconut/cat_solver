@@ -89,6 +89,7 @@ fn main() -> std::io::Result<()> {
         "kissat/src/sweep.c",
         "kissat/src/terminate.c",
         "kissat/src/trail.c",
+        "kissat/src/transitive.c",
         "kissat/src/utilities.c",
         "kissat/src/vector.c",
         "kissat/src/vivify.c",
